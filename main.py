@@ -59,13 +59,13 @@ async def help(ctx):
         colour = discord.Colour.blue()
     )
     embed.set_author(name='Stonks')
-    embed.add_field(name="!dolar", value='Informa a cotação do Dolar.', inline = False)
-    embed.add_field(name="!euro", value='Informa a cotação do Euro.', inline = False)
-    embed.add_field(name="!rublo", value='Informa a cotação do Rublo.', inline = False)
-    embed.add_field(name="!bitcoin", value='Informa a cotação do Bitcoin.', inline = False)       #help
-    embed.add_field(name="!peso", value='Informa a cotação do Peso Argentino.', inline = False)
-    embed.add_field(name="!libra", value='Informa a cotação da libra.', inline = False)
-    embed.add_field(name="!converter", value='converte um valor em dolar para real.', inline = False)
+    embed.add_field(name=".dolar", value='Informa a cotação do Dolar.', inline = False)
+    embed.add_field(name=".euro", value='Informa a cotação do Euro.', inline = False)
+    embed.add_field(name=".rublo", value='Informa a cotação do Rublo.', inline = False)
+    embed.add_field(name=".bitcoin", value='Informa a cotação do Bitcoin.', inline = False)       #help
+    embed.add_field(name=".peso", value='Informa a cotação do Peso Argentino.', inline = False)
+    embed.add_field(name=".libra", value='Informa a cotação da libra.', inline = False)
+    embed.add_field(name=".converter", value='converte um valor em dolar para real.', inline = False)
     await ctx.send(author, embed=embed)
 
 
