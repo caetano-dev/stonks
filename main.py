@@ -55,7 +55,7 @@ async def help(ctx):
     embed = discord.Embed(
         colour = discord.Colour.blue()
     )
-    embed.set_author(name='Stonks')
+    embed.set_author(name='Stonks. Bem vindo.')
     embed.add_field(name=".dolar", value='Informa a cotação do Dolar.', inline = False)
     embed.add_field(name=".euro", value='Informa a cotação do Euro.', inline = False)
     embed.add_field(name=".rublo", value='Informa a cotação do Rublo.', inline = False)
@@ -63,6 +63,7 @@ async def help(ctx):
     embed.add_field(name=".peso", value='Informa a cotação do Peso Argentino.', inline = False)
     embed.add_field(name=".libra", value='Informa a cotação da Libra.', inline = False)
     embed.add_field(name=".converter", value='Converte um valor em Dolar para Real.', inline = False)
+    embed.add_field(name=".imposto", value='Fala umas verdades.', inline = False)
     await ctx.send(author, embed=embed)
     
 @client.command()                          
@@ -98,13 +99,18 @@ async def bitcoin(ctx):
 @client.command()  
 async def vbuck(ctx):
     await ctx.send('KKKKKKKKK VBUCK TA CARO PRA CARALHO')                                         #vbuck
+
+@client.command()                
+async def imposto(ctx):                      
+    await ctx.send('IMPOSTO É ROUBO :angry:')
+
 #------------------------------------------------------------------------------------
 
 @client.command()
 async def converter(ctx, arg):
     multiplicacao = (float("{0:.4}".format(dolar_float))*float("{0:.4}".format(arg)))        #converter
-    await ctx.send (f'{arg} Dolares valem mais ou menos {multiplicacao} reais.')
+    await ctx.send (f'{arg} Dolares valem mais ou menos {multiplicacao} Reais.')
 
 #------------------------------------------------------------------------------------------------------
 
-client.run("#token do bot")
+client.run('#TOKEN') 
