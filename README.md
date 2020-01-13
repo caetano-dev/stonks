@@ -1,2 +1,2 @@
-# stonks
-Brazilian Discord bot that helps with money exchange 
+# Stonks
+Brazilian Discord bot that helps with money exchange.
