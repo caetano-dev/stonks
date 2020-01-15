@@ -34,16 +34,16 @@ class Cotacao:
     def bitcoin(self):
         return self.__get_cotacao('https://dolarhoje.com/bitcoin-hoje/')
 
-
 cotacao = Cotacao()
 
 dolar_float = float(cotacao.dolar())
 #-----------------------------------------------------------------------------------------------------------------------
-client = commands.Bot(command_prefix = ".")  #prefixo do bot 
-client.remove_command('help') #remove o comando help para fazer um personalizado
+client = commands.Bot(command_prefix = ".")   #prefixo do bot 
+client.remove_command('help')      #remove o comando help para fazer um personalizado
 mensagem_bonitinha = ('Analisando minha bolsa de valores:chart_with_upwards_trend:...Por favor aguarde.') #mensagem antes dos valores
 
 print('software online')
+
 @client.event
 async def on_ready():
     print('bot online')
@@ -98,13 +98,15 @@ async def bitcoin(ctx):
 
 @client.command()  
 async def vbuck(ctx):
-    await ctx.send('KKKKKKKKK VBUCK TA CARO PRA CARALHO')                                         #vbuck
+    await ctx.send('KKKKKKKKK VBUCK TA CARO DEMAIS MANO')                                         #vbuck
 
 @client.command()                
 async def imposto(ctx):                      
     await ctx.send('IMPOSTO É ROUBO :angry:')
 
-#------------------------------------------------------------------------------------
+@client.command()
+async def stonks(ctx):
+    await ctx.send('Estou aqui para te ajudar com conversão de moedas. Digite ".help" para ver o que posso fazer!')
 
 @client.command()
 async def converter(ctx, arg):
