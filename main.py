@@ -116,9 +116,11 @@ async def stonks(ctx):
 
 @client.command()
 async def converter(ctx, arg):
-    multiplicacao = (float("{0:.4}".format(dolar_float))*float("{0:.4}".format(arg)))        #converter
-    await ctx.send (f'{arg} Dolares valem mais ou menos {multiplicacao} Reais.')
-    
+    try:
+        multiplicacao = (float("{0:.4}".format(dolar_float))*float("{0:.4}".format(arg)))        #converter
+        await ctx.send (f'{arg} Dolares valem mais ou menos {multiplicacao} Reais.')
+    except: 
+        await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula. ")
 #------------------------------------------------------------------------------------------------------
 
-client.run(#token)
+client.run('#your token')
