@@ -127,4 +127,4 @@ async def converter(ctx, arg):
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula. ")
 #------------------------------------------------------------------------------------------------------
 
-client.run(#your token)
+# client.run(#your token)
