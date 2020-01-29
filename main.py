@@ -4,7 +4,7 @@ from discord.ext import commands
 import urllib.request as req
 import re
 from time import sleep
-
+from math import trunc
 #--------------------------------------------
 class Cotacao:
 
@@ -102,11 +102,15 @@ async def bitcoin(ctx):
 
 @client.command()  
 async def vbuck(ctx):
-    await ctx.send('KKKKKKKKK VBUCK TA CARO DEMAIS MANO')                                         #vbuck
+    await ctx.send('KKKKKKKKK VBUCK TA CARO DEMAIS MANO.')                                         #vbuck
 
 @client.command()                
 async def imposto(ctx):                      
-    await ctx.send('IMPOSTO É ROBÔ :robot:')
+    msg = await ctx.send('IMPOSTO')
+    sleep(1)
+    await msg.edit(content=('É'))
+    sleep(1)
+    await msg.edit(content=('ROBÔ :robot:'))
 
 @client.command()
 async def stonks(ctx):
@@ -117,10 +121,10 @@ async def stonks(ctx):
 @client.command()
 async def converter(ctx, arg):
     try:
-        multiplicacao = (float("{0:.4}".format(dolar_float))*float("{0:.4}".format(arg)))        #converter
-        await ctx.send (f'{arg} Dolares valem mais ou menos {multiplicacao} Reais.')
+        multiplicacao = (float("{}".format(dolar_float))*float("{}".format(arg)))        #converter{0:.4}
+        await ctx.send (f'{arg} Dolares valem mais ou menos {trunc(multiplicacao)} Reais.')
     except: 
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula. ")
 #------------------------------------------------------------------------------------------------------
 
-client.run('#your token')
+client.run(#your token)
