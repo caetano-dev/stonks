@@ -65,6 +65,7 @@ async def help(ctx):
     embed.add_field(name=".converter", value='Converte um valor em Dolar para Real.', inline = False)
     embed.add_field(name=".vbuck", value='Informa o preço do Vbuck.', inline = False)
     embed.add_field(name=".imposto", value='Fala umas verdades.', inline = False)
+    embed.add_field(name=".repita", value='Repete algo que foi falado pelo autor do comando.', inline = False)
     await ctx.send(author, embed=embed)
     
 @client.command()
@@ -131,6 +132,12 @@ async def converter(ctx, arg):
         await ctx.send (f'{arg} Dolares valem mais ou menos {trunc(multiplicacao)} Reais.')
     except:
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula.")
+
+@client.event
+async def on_message(message):
+    if 'imposto' in message.content:
+        await message.channel.send('EU OUVI IMPOSTO?')
+
 #------------------------------------------------------------------------------------------------------
 
-# client.run("token")
+# client.run(token)
