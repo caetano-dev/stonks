@@ -5,6 +5,7 @@ import urllib.request as req
 import re
 from time import sleep
 from math import trunc
+from random import choice
 #--------------------------------------------
 class Cotacao:
 
@@ -12,8 +13,10 @@ class Cotacao:
         pagina = req.urlopen(url)
         s = pagina.read().decode('utf-8')
         m = re.match(regex, s, re.DOTALL)
+
         if m:
             return float(m.group(1).replace(',', '.'))
+        
         else:
             return 0
 
@@ -72,38 +75,38 @@ async def help(ctx):
 async def dolar(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Dolar está custando {cotacao.dolar()} Reais. :money_with_wings: '))    #dolar
+    await msg.edit(content=(f'1 Dolar está custando R${cotacao.dolar()}. :money_with_wings: '))    #dolar
 
 
 @client.command()
 async def euro(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Euro está custando {cotacao.euro()} Reais. :money_with_wings: '))      #euro
+    await msg.edit(content=(f'1 Euro está custando R${cotacao.euro()}. :money_with_wings: '))      #euro
 
 @client.command()
 async def libra(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Libra está custando {cotacao.libra()} Reais. :money_with_wings: '))     #libra
+    await msg.edit(content=(f'1 Libra está custando R${cotacao.libra()}. :money_with_wings: '))     #libra
 
 @client.command()
 async def rublo(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Rublo Russo está custando {cotacao.rublo()} Reais. :money_with_wings: '))   #rublo
+    await msg.edit(content=(f'1 Rublo Russo está custando R${cotacao.rublo()}. :money_with_wings: '))   #rublo
 
 @client.command()
 async def peso(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Peso Argentino está custando {cotacao.peso()} Reais. :money_with_wings: '))    #peso
+    await msg.edit(content=(f'1 Peso Argentino está custando R${cotacao.peso()}. :money_with_wings: '))    #peso
 
 @client.command()
 async def bitcoin(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Bitcoin está custando {cotacao.bitcoin()} Reais. :money_with_wings: '))     #bitcoin
+    await msg.edit(content=(f'1 Bitcoin está custando R${cotacao.bitcoin()}. :money_with_wings: '))     #bitcoin
 
 @client.command()
 async def vbuck(ctx):
@@ -135,9 +138,15 @@ async def converter(ctx, arg):
 
 @client.event
 async def on_message(message):
+    falas = ['EU OUVI IMPOSTO?',
+    'IMPOSTO? TA NO HORA DE SONEGAR',
+    'EU ODEIO IMPOSTO MANO',
+    'MANO NAO VEM COM ESSES PAPOS AI DE IMPOSTO NAO QUE EU JA FICO PISTOLA',
+    "IMPOSTO?? acho que voce quis dizer ROUBO"]
+
     if 'imposto' in message.content:
-        await message.channel.send('EU OUVI IMPOSTO?')
+        await message.channel.send(choice(falas))
 
 #------------------------------------------------------------------------------------------------------
 
-# client.run(token)
+client.run('NjUzMzA0ODY4MTA2MjcyNzY5.XjbrLA.e5taWG6LdQUUEew_V_XLhza05-M')
