@@ -35,6 +35,8 @@ async def help(ctx):
     embed.add_field(name=".euro", value='Informa a cotação do Euro.', inline = False)
     embed.add_field(name=".rublo", value='Informa a cotação do Rublo.', inline = False)
     embed.add_field(name=".honkong", value='Informa a cotação do Dólar de Hong Kong.', inline = False)
+    embed.add_field(name=".mexicano", value='Informa a cotação do Peso mexicano de Hong Kong.', inline = False)
+    embed.add_field(name=".coroa", value='Informa a cotação da Coroa dinamarquesa de Hong Kong.', inline = False)
     embed.add_field(name=".converter", value='Converte um valor em Dólar para Real.', inline = False)
     embed.add_field(name=".vbuck", value='Informa o preço do Vbuck.', inline = False)
     embed.add_field(name=".roubo", value='Fala umas verdades.', inline = False)
@@ -66,6 +68,16 @@ async def iene(ctx):
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
     await msg.edit(content=(f'1 Iene está custando R${valor}. :money_with_wings: '))
+
+@client.command()
+async def coroa(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=DKK")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
+    msg = await ctx.send(mensagem_bonitinha)
+    sleep(1)
+    await msg.edit(content=(f'1 Coroa Dinamarquesa está custando R${valor}. :money_with_wings: '))
+
 
 @client.command()
 async def rublo(ctx):
@@ -104,6 +116,15 @@ async def franco(ctx):
     await msg.edit(content=(f'1 Franco Suiço está custando R${valor}. :money_with_wings: '))
 
 @client.command()
+async def mexicano(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=DKK")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
+    msg = await ctx.send(mensagem_bonitinha)
+    sleep(1)
+    await msg.edit(content=(f'1 Peso Mexicano está custando R${valor}. :money_with_wings: '))
+
+@client.command()
 async def vbuck(ctx):
     await ctx.send(mensagem_bonitinha)
     sleep(1)
@@ -135,7 +156,8 @@ async def converter(ctx, arg=1):
     except:
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula.")
 
-# https://api.exchangeratesapi.io/latest?base=USD   bot's api
+#https://api.exchangeratesapi.io/latest?base=USD   bot's api
+
 #------------------------------------------------------------------------------------------------------
 
-# client.run('ur token')
+client.run('NjUzMzA0ODY4MTA2MjcyNzY5.Xjm3UA.oUBa_V0ccL8NbcMhwlJvClKoLuA')
