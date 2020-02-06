@@ -1,51 +1,20 @@
 import discord
 import asyncio
+import requests
+import json
 from discord.ext import commands
-import urllib.request as req
-import re
 from time import sleep
 from math import trunc
 from random import choice
-#--------------------------------------------
-class Cotacao:
 
-    def __get_cotacao(self, url, regex='^.*nacional" value="([0-9,]+)"'):   #pegar o valor das moedas
-        pagina = req.urlopen(url)
-        s = pagina.read().decode('utf-8')
-        m = re.match(regex, s, re.DOTALL)
-
-        if m:
-            return float(m.group(1).replace(',', '.'))
-        
-        else:
-            return 0
-
-    def dolar(self):
-        return (self.__get_cotacao('http://dolarhoje.com/'))
-
-    def euro(self):
-        return self.__get_cotacao('http://eurohoje.com/')
-
-    def libra(self):
-        return self.__get_cotacao('http://librahoje.com/')
-
-    def rublo(self):
-        return self.__get_cotacao('https://dolarhoje.com/rublo-russo-hoje/')
-
-    def peso(self):
-        return self.__get_cotacao('https://dolarhoje.com/peso-argentino/')
-
-    def bitcoin(self):
-        return self.__get_cotacao('https://dolarhoje.com/bitcoin-hoje/')
-
-cotacao = Cotacao()
-dolar_float = float(cotacao.dolar())
 #-----------------------------------------------------------------------------------------------------------------------
 client = commands.Bot(command_prefix = ".")   #prefix
 client.remove_command('help')
-mensagem_bonitinha = ('Analisando minha bolsa de valores:chart_with_upwards_trend:...Por favor aguarde.') #mensagem antes dos valores
+mensagem_bonitinha = ('Analisando minha bolsa de valores:chart_with_upwards_trend:...Por favor aguarde.') #message before value
 
 print('software online')
+sleep(1)
+print('booting up bot...')
 
 @client.event
 async def on_ready():
@@ -59,63 +28,89 @@ async def help(ctx):
         colour = discord.Colour.blue()
     )
     embed.set_author(name='Stonks. Bem vindo.')
-    embed.add_field(name=".dolar", value='Informa a cotação do Dolar.', inline = False)
+    embed.add_field(name=".dolar", value='Informa a cotação do Dólar.', inline = False)
+    embed.add_field(name=".franco", value='Informa a cotação do Franco Suíço.', inline = False)
+    embed.add_field(name=".canadense", value='Informa a cotação do Dólar Canadense.', inline = False) #help structure
+    embed.add_field(name=".iene", value='Informa a cotação do Iene.', inline = False)
     embed.add_field(name=".euro", value='Informa a cotação do Euro.', inline = False)
     embed.add_field(name=".rublo", value='Informa a cotação do Rublo.', inline = False)
-    embed.add_field(name=".bitcoin", value='Informa a cotação do Bitcoin.', inline = False)          #help
-    embed.add_field(name=".peso", value='Informa a cotação do Peso Argentino.', inline = False)
-    embed.add_field(name=".libra", value='Informa a cotação da Libra.', inline = False)
-    embed.add_field(name=".converter", value='Converte um valor em Dolar para Real.', inline = False)
+    embed.add_field(name=".honkong", value='Informa a cotação do Dólar de Hong Kong.', inline = False)
+    embed.add_field(name=".converter", value='Converte um valor em Dólar para Real.', inline = False)
     embed.add_field(name=".vbuck", value='Informa o preço do Vbuck.', inline = False)
-    embed.add_field(name=".imposto", value='Fala umas verdades.', inline = False)
-    embed.add_field(name=".repita", value='Repete algo que foi falado pelo autor do comando.', inline = False)
+    embed.add_field(name=".roubo", value='Fala umas verdades.', inline = False)
     await ctx.send(author, embed=embed)
     
 @client.command()
 async def dolar(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=USD") #API
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Dolar está custando R${cotacao.dolar()}. :money_with_wings: '))    #dolar
-
+    await msg.edit(content=(f'1 Dolar está custando R${valor}. :money_with_wings: '))
 
 @client.command()
 async def euro(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=EUR")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Euro está custando R${cotacao.euro()}. :money_with_wings: '))      #euro
+    await msg.edit(content=(f'1 Euro está custando R${valor}. :money_with_wings: '))
 
 @client.command()
-async def libra(ctx):
+async def iene(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=JPY")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Libra está custando R${cotacao.libra()}. :money_with_wings: '))     #libra
+    await msg.edit(content=(f'1 Iene está custando R${valor}. :money_with_wings: '))
 
 @client.command()
 async def rublo(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=RUB")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Rublo Russo está custando R${cotacao.rublo()}. :money_with_wings: '))   #rublo
+    await msg.edit(content=(f'1 Rublo está custando R${valor}. :money_with_wings: '))
 
 @client.command()
-async def peso(ctx):
+async def canadense(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=CAD")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Peso Argentino está custando R${cotacao.peso()}. :money_with_wings: '))    #peso
+    await msg.edit(content=(f'1 Dolar Canadense está custando R${valor}. :money_with_wings: '))
 
 @client.command()
-async def bitcoin(ctx):
+async def hongkong(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=HKD")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Bitcoin está custando R${cotacao.bitcoin()}. :money_with_wings: '))     #bitcoin
+    await msg.edit(content=(f'1 Dolar de Hong Kong está custando R${valor}. :money_with_wings: '))
+
+@client.command()
+async def franco(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=CHF")
+    cotacao = json.loads(requisicao.text)
+    valor = cotacao["rates"] ["BRL"]
+    msg = await ctx.send(mensagem_bonitinha)
+    sleep(1)
+    await msg.edit(content=(f'1 Franco Suiço está custando R${valor}. :money_with_wings: '))
 
 @client.command()
 async def vbuck(ctx):
     await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await ctx.send('KKKKKKKKK VBUCK TA CARO DEMAIS MANO. VAI DAR NAO.')                                         #vbuck
+    await ctx.send('KKKKKKKKK VBUCK TA CARO DEMAIS MANO. VAI DAR NAO.')#vbuck
 
 @client.command()
-async def imposto(ctx):
+async def roubo(ctx):
     msg = await ctx.send('IMPOSTO')
     sleep(1)
     await msg.edit(content=('É'))
@@ -129,24 +124,18 @@ async def stonks(ctx):
     await ctx.send('Digite ".help" para ver o que posso fazer!')
 
 @client.command()
-async def converter(ctx, arg):
+async def converter(ctx, arg=1):
     try:
-        multiplicacao = (float("{}".format(dolar_float))*float("{}".format(arg)))        #convert
+        requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=USD")
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        multiplicacao = (valor)* int(arg)        #convert
         await ctx.send (f'{arg} Dolares valem mais ou menos {trunc(multiplicacao)} Reais.')
+
     except:
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula.")
 
-@client.event
-async def on_message(message):
-    falas = ['EU OUVI IMPOSTO?',
-    'IMPOSTO? TA NO HORA DE SONEGAR',
-    'EU ODEIO IMPOSTO MANO',
-    'MANO NAO VEM COM ESSES PAPOS AI DE IMPOSTO NAO QUE EU JA FICO PISTOLA',
-    "IMPOSTO?? acho que voce quis dizer ROUBO"]
-
-    if 'imposto' in message.content:
-        await message.channel.send(choice(falas))
-
+# https://api.exchangeratesapi.io/latest?base=USD   bot's api
 #------------------------------------------------------------------------------------------------------
 
-# client.run('')
+# client.run('ur token')
