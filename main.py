@@ -35,7 +35,7 @@ async def help(ctx):
     embed.add_field(name=".euro", value='Informa a cotação do Euro.', inline = False)
     embed.add_field(name=".rublo", value='Informa a cotação do Rublo.', inline = False)
     embed.add_field(name=".honkong", value='Informa a cotação do Dólar de Hong Kong.', inline = False)
-    embed.add_field(name=".mexicano", value='Informa a cotação do Peso mexicano de Hong Kong.', inline = False)
+    embed.add_field(name=".mexico", value='Informa a cotação do Peso mexicano de Hong Kong.', inline = False)
     embed.add_field(name=".coroa", value='Informa a cotação da Coroa dinamarquesa de Hong Kong.', inline = False)
     embed.add_field(name=".converter", value='Converte um valor em Dólar para Real.', inline = False)
     embed.add_field(name=".vbuck", value='Informa o preço do Vbuck.', inline = False)
@@ -116,8 +116,8 @@ async def franco(ctx):
     await msg.edit(content=(f'1 Franco Suiço está custando R${valor}. :money_with_wings: '))
 
 @client.command()
-async def mexicano(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=DKK")
+async def mexico(ctx):
+    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=MXN")
     cotacao = json.loads(requisicao.text)
     valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
@@ -160,4 +160,4 @@ async def converter(ctx, arg=1):
 
 #------------------------------------------------------------------------------------------------------
 
-# client.run('token')
+client.run('NjUzMzA0ODY4MTA2MjcyNzY5.Xjx0SQ.7nBdlam5KGyeSePp2RrTYkdsHe8')
