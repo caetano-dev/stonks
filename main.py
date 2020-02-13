@@ -160,4 +160,4 @@ async def converter(ctx, arg=1):
 
 #------------------------------------------------------------------------------------------------------
 
-client.run('NjUzMzA0ODY4MTA2MjcyNzY5.Xjx0SQ.7nBdlam5KGyeSePp2RrTYkdsHe8')
+# client.run('     token    ')
