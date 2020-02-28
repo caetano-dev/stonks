@@ -7,7 +7,6 @@ from time import sleep
 from math import trunc
 from random import choice
 
-#-----------------------------------------------------------------------------------------------------------------------
 client = commands.Bot(command_prefix = ".")   #prefix
 client.remove_command('help')
 mensagem_bonitinha = ('Analisando minha bolsa de valores:chart_with_upwards_trend:...Por favor aguarde.') #message before value
@@ -20,7 +19,102 @@ print('booting up bot...')
 async def on_ready():
     print('bot online')
 
-#-----------------------------------------    #comandos
+
+class Exchange():
+    def __get_cotacao(self, url, coin):
+        self.url = url
+        self.coin = coin
+        
+    
+    def dolar(self):
+        coin = "USD"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+        
+
+    def euro(self):
+        coin = "EUR"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+
+
+    def iene(self):
+        coin = "JPY"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+
+
+    def coroa(self):
+        coin = "DKK"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+    
+    def rublo(self):
+        coin = "RUB"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]   
+        strvalor = str(valor)
+        return strvalor[0:4]
+     
+
+    def canadense(self):
+        coin = "CAD"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+
+    def hongkong(self):
+        coin = "HKD"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+
+
+    def franco(self):
+        coin = "CHF"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = cotacao["rates"] ["BRL"]
+        strvalor = str(valor)
+        return strvalor[0:4]
+
+
+    def mexico(self):
+        coin = "MXN"
+        url = "https://api.exchangeratesapi.io/latest?base=" + (coin)
+        requisicao = requests.get(url)
+        cotacao = json.loads(requisicao.text)
+        valor = (cotacao["rates"] ["BRL"])
+        strvalor = str(valor)
+        return strvalor[0:4]
+  
+moeda = Exchange()
+
 @client.command(pass_context = True)
 async def help(ctx):
     author = ctx.message.author
@@ -41,88 +135,61 @@ async def help(ctx):
     embed.add_field(name=".vbuck", value='Informa o preço do Vbuck.', inline = False)
     embed.add_field(name=".roubo", value='Fala umas verdades.', inline = False)
     await ctx.send(author, embed=embed)
-    
+
+
 @client.command()
 async def dolar(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=USD") #API
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Dolar está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Dolar está custando R${moeda.dolar()}. :money_with_wings:'))
 
 @client.command()
 async def euro(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=EUR")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Euro está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Euro está custando R${moeda.euro()}. :money_with_wings:'))
 
 @client.command()
 async def iene(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=JPY")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Iene está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Iene está custando R${moeda.iene()}. :money_with_wings:'))
 
 @client.command()
 async def coroa(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=DKK")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Coroa Dinamarquesa está custando R${valor}. :money_with_wings: '))
-
+    await msg.edit(content=(f'1 Coroa Dinamarquesa está custando R${moeda.coroa()}. :money_with_wings:'))
 
 @client.command()
 async def rublo(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=RUB")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Rublo está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Rublo está custando R${moeda.rublo()}. :money_with_wings:'))
 
 @client.command()
 async def canadense(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=CAD")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Dolar Canadense está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Dolar canadense está custando R${moeda.canadense()}. :money_with_wings:'))
 
 @client.command()
 async def hongkong(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=HKD")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Dolar de Hong Kong está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Iene de Hongkong está custando R${moeda.hongkong()}. :money_with_wings:'))
 
 @client.command()
 async def franco(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=CHF")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Franco Suiço está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Franco Suíço está custando R${moeda.franco()}. :money_with_wings:'))
 
 @client.command()
 async def mexico(ctx):
-    requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=MXN")
-    cotacao = json.loads(requisicao.text)
-    valor = cotacao["rates"] ["BRL"]
     msg = await ctx.send(mensagem_bonitinha)
     sleep(1)
-    await msg.edit(content=(f'1 Peso Mexicano está custando R${valor}. :money_with_wings: '))
+    await msg.edit(content=(f'1 Peso mexicano está custando R${moeda.mexico()}. :money_with_wings:'))
 
 @client.command()
 async def vbuck(ctx):
@@ -147,17 +214,16 @@ async def stonks(ctx):
 @client.command()
 async def converter(ctx, arg=1):
     try:
-        requisicao = requests.get("https://api.exchangeratesapi.io/latest?base=USD")
+        url = "https://api.exchangeratesapi.io/latest?base=USD"
+        requisicao = requests.get(url)
         cotacao = json.loads(requisicao.text)
         valor = cotacao["rates"] ["BRL"]
-        multiplicacao = (valor)* int(arg)        #convert
+        multiplicacao = int(arg) * float(valor)        #convert
         await ctx.send (f'{arg} Dolares valem mais ou menos {trunc(multiplicacao)} Reais.')
 
     except:
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula.")
 
-#https://api.exchangeratesapi.io/latest?base=USD   bot's api
 
-#------------------------------------------------------------------------------------------------------
 
-# client.run('     token    ')
+client.run('token') #testes
