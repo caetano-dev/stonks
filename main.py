@@ -226,4 +226,4 @@ async def converter(ctx, arg=1):
 
 
 
-client.run('token') #testes
+client.run('token')
