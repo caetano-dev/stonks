@@ -3,9 +3,12 @@ import asyncio
 import requests
 import json
 from discord.ext import commands
+from bs4 import BeautifulSoup
 from time import sleep
 from math import trunc
-from random import choice, randint
+from random import choices, randint
+
+
 
 client = commands.Bot(command_prefix = ".")   #prefix
 client.remove_command('help')
@@ -134,6 +137,7 @@ async def help(ctx):
     embed.add_field(name=".converter", value='Converte um valor em Dólar para Real.', inline = False)
     embed.add_field(name=".vbuck", value='Informa o preço do Vbuck.', inline = False)
     embed.add_field(name=".roubo", value='Fala umas verdades.', inline = False)
+    embed.add_field(name=".video", value='Sugere um video do youtube sobre stonks.', inline = False)
     await ctx.send(author, embed=embed)
 
 
@@ -238,9 +242,10 @@ async def video(ctx):
                 videos.append(links)
         x = randint(0,19)
         
-        await ctx.send(f'https://www.youtube.com/{videos[x]}')
+        await ctx.send(f'Talvez você goste disso: https://www.youtube.com/{videos[x]}')
     except:
         await ctx.send('Não achei nada interessante, tente denovo')
+    
 
 
 
