@@ -5,7 +5,7 @@ import json
 from discord.ext import commands
 from time import sleep
 from math import trunc
-from random import choice
+from random import choice, randint
 
 client = commands.Bot(command_prefix = ".")   #prefix
 client.remove_command('help')
