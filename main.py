@@ -224,6 +224,24 @@ async def converter(ctx, arg=1):
     except:
         await ctx.send("Formato não suportado. Tente usar ponto ao invés de vírgula.")
 
+@client.command()
+async def video(ctx):
+    try:
+        headers = {"UserAgent" : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36'}
+        URL = 'https://www.youtube.com/results?search_query=stonks'
+        page = requests.get(URL, headers=headers)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        videos = []
+        for link in soup.find_all('a'):
+            links = (link.get('href'))
+            if "/watch?v=" in links and "https" not in links and "radio=" not in links:  #20 links
+                videos.append(links)
+        x = randint(0,19)
+        
+        await ctx.send(f'https://www.youtube.com/{videos[x]}')
+    except:
+        await ctx.send('Não achei nada interessante, tente denovo')
+
 
 
 client.run('token')
