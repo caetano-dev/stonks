@@ -9,7 +9,6 @@ from math import trunc
 from random import randint
 
 
-
 client = commands.Bot(command_prefix = ".")   #prefix
 client.remove_command('help')
 mensagem_bonitinha = ('Analisando minha bolsa de valores:chart_with_upwards_trend:...Por favor aguarde.') #message before value
@@ -245,8 +244,6 @@ async def video(ctx):
         await ctx.send(f'Talvez você goste disso: https://www.youtube.com/{videos[x]}')
     except:
         await ctx.send('Não achei nada interessante, tente denovo')
-    
 
 
-
-client.run('token')
+client.run('NjUzNjcwNjQ4MzMzMzM2NTc2.Xl2uZA.6N_tyjY10dCsgh6zOmjFXwgPiH0') #testes
