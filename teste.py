@@ -246,4 +246,4 @@ async def video(ctx):
         await ctx.send('Não achei nada interessante, tente denovo')
 
 
-client.run('NjUzNjcwNjQ4MzMzMzM2NTc2.Xl2uZA.6N_tyjY10dCsgh6zOmjFXwgPiH0') #testes
+client.run('') #testes

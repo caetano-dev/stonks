@@ -247,6 +247,4 @@ async def video(ctx):
         await ctx.send('Não achei nada interessante, tente denovo')
     
 
-
-
-client.run('token')
+client.run('your bot token')
