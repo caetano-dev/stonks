@@ -265,7 +265,7 @@ async def video(ctx):
 
         await ctx.send(f'Talvez você goste disso: https://www.youtube.com/{videos[x]}')
     except:
-        await ctx.send('Não achei nada interessante, tente denovo')
+        await ctx.send('Não achei nada interessante, tente de novo')
 
 
 client.run('your bot token')
